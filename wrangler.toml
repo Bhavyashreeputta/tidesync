@@ -1,10 +1,9 @@
 # wrangler.toml
 name = "tidesync"                     
-compatibility_date = "2025-04-20"      
-type = "javascript"                    
+compatibility_date = "2025-04-20"     
 
-# Wrangler v4 will generate a “workers-site/index.js” entry for you
-main = "workers-site/index.js"
+# Wrangler v4 expects your static site’s Worker script here
+main = "workers-site/worker.js"
 
 [site]
-  bucket = "./out"                     
+  bucket = "./out"                   
