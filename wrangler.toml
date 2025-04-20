@@ -1,9 +1,13 @@
-# wrangler.toml
-name = "tidesync"                     
-compatibility_date = "2025-04-20"     
+name = "tidesync"
+compatibility_date = "2025-04-20"
 
-# Wrangler v4 expects your static site’s Worker script here
-main = "workers-site/worker.js"
+# point Wrangler at your built JS entrypoint
+main = "workers-site/index.js"
+
+[build]
+# only build—not export
+command = "npm run build"
 
 [site]
-  bucket = "./out"                   
+bucket = "./out"
+
