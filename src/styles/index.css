@@ -1,0 +1,146 @@
+.container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+.container h1 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.container p {
+  color: #555;
+  margin-bottom: 0.5rem;
+}
+
+.file-input-wrapper input[type="file"]::file-selector-button {
+  background-color: #007acc;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  margin-right: 0.5rem;
+  margin-bottom: 1rem;
+  color: #fff;
+  font-size: 1rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.file-input-wrapper input[type="file"]::file-selector-button:hover {
+  background-color: #005fa3;
+}
+
+.file-input-wrapper input[type="file"]::-webkit-file-upload-button {
+  background-color: #007acc;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  margin-right: 0.5rem;
+  color: #fff;
+  font-size: 1rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.file-input-wrapper input[type="file"]::-webkit-file-upload-button:hover {
+  background-color: #005fa3;
+}
+
+.button-wrapper {
+  margin-top: 1.5rem;
+  text-align: right;
+}
+
+.button-wrapper button {
+  background-color: #007acc;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+.button-wrapper button:not(:disabled):hover,
+.button-wrapper button:not(:disabled):focus {
+  background-color: #005fa3;
+  outline: none;
+}
+
+.button-wrapper button:disabled {
+  background-color: #cbd5e0;
+  color: #718096;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.note {
+  display: block;           
+  font-size: 14px;      
+  color: #666;             
+  font-style: italic;      
+  margin: 0.5rem;    
+  text-align: center;       
+}
+
+.banner-error {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin: 0.75rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.95rem;
+}
+
+.banner-error .retry {
+  background: none;
+  border: none;
+  color: #721c24;
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: 600;
+  padding: 0 0.5rem;
+}
+
+.banner-warning {
+  background: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeeba;
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin: 0.75rem 0;
+  font-size: 0.95rem;
+}
+
+.banner-success {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin: 0.75rem 0;
+  font-size: 0.95rem;
+}
+
+.spinner {
+  width: 2rem;
+  height: 2rem;
+  margin: 1rem auto;
+  border: 4px solid #eee;
+  border-top-color: #007acc;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
