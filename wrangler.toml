@@ -1,9 +1,10 @@
-name = "tidesync"                       
-compatibility_date = "2025-04-20"    
+# wrangler.toml
+name = "tidesync"                     
+compatibility_date = "2025-04-20"      
+type = "javascript"                    
 
-# If you have an account_id, uncomment and fill it in:
-# account_id = "your-cloudflare-account-id"
+# Wrangler v4 will generate a “workers-site/index.js” entry for you
+main = "workers-site/index.js"
 
 [site]
-  bucket = "./out"
-  entry-point = "workers-site"
+  bucket = "./out"                     
