@@ -11,7 +11,7 @@ const hdrs = {
   Authorization: `Bearer ${TOKEN}`,
 }
 
-const searchID = async(field: 'external_id', val: string) =>{
+const searchID = async (field: 'external_id', val: string) => {
   const resp = await fetch(`${BASE}/contacts/search`, {
     method: 'POST',
     headers: hdrs,
@@ -27,30 +27,30 @@ const searchID = async(field: 'external_id', val: string) =>{
     throw new Error(`Error searching for ID: ${err.message}`);
   });
 
-  if(!resp.ok){
+  if (!resp.ok) {
     throw new Error(`Error searching for ${field} ${val}: ${resp.statusText}`);
   }
 
-  const {data} = await resp.json();
+  const { data } = await resp.json();
   return data[0]?.id;
 }
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<{success: boolean; error?: string}>
-){
-  if(!TOKEN){
-    return res.status(500).json({success: false, error: 'No access token provided'});
+  res: NextApiResponse<{ success: boolean; error?: string }>
+) {
+  if (!TOKEN) {
+    return res.status(500).json({ success: false, error: 'No access token provided' });
   }
 
-  const {rows} = req.body as {rows: PatientRow[]};
+  const { rows } = req.body as { rows: PatientRow[] };
 
-  for(let i = 0; i<rows.length; i++){
+  for (let i = 0; i < rows.length; i++) {
     const raw = rows[i];
-    const line = i+1;
+    const line = i + 1;
 
     const row = Object.fromEntries(
-      Object.entries(raw).map(([k,v]) => [k, (v as string).trim()])
+      Object.entries(raw).map(([k, v]) => [k, (v as string).trim()])
     ) as PatientRow;
 
     const payload: {
@@ -58,31 +58,31 @@ export default async function handler(
       name?: string;
       email?: string;
       phone?: string;
-      custom_attributes?: {referring_provider?: string};
+      custom_attributes?: { referring_provider?: string };
     } = {}
 
-    if(row['EHR ID']){
+    if (row['EHR ID']) {
       payload.external_id = row['EHR ID'];
     }
 
-    if(row['Patient Name']){
+    if (row['Patient Name']) {
       payload.name = row['Patient Name'];
     }
 
-    if(row['email']){
-      payload.email = row['email'];
+    if (row['Email']) {
+      payload.email = row['Email'];
     }
 
-    if(row['phone']){
-      payload.phone = row['phone'];
+    if (row['Phone']) {
+      payload.phone = row['Phone'];
     }
 
-    if(row['Referring Provider']){
-      payload.custom_attributes = {referring_provider: row['Referring Provider']};
+    if (row['Referring Provider']) {
+      payload.custom_attributes = { referring_provider: row['Referring Provider'] };
     }
 
-    if(!payload.external_id){
-      return res.status(400).json({success: false, error: `Row ${line} is missing an EHR ID`});
+    if (!payload.external_id) {
+      return res.status(400).json({ success: false, error: `Row ${line} is missing an EHR ID` });
     }
 
     const id = payload.external_id ? await searchID('external_id', payload.external_id) : undefined;
@@ -90,17 +90,17 @@ export default async function handler(
     const r = await fetch(
       `${BASE}/contacts/${id ? '/' + id : ''}`,
       {
-        method: id? 'PUT' : 'POST',
+        method: id ? 'PUT' : 'POST',
         headers: hdrs,
         body: JSON.stringify(payload)
       }
     )
 
-    if(!r.ok){
+    if (!r.ok) {
       const err = await r.json();
-      return res.status(400).json({success: false, error: `Row ${line} failed: ${err.message}`});
+      return res.status(400).json({ success: false, error: `Row ${line} failed: ${err.message}` });
     }
-    
-    return res.status(200).json({success: true}); 
+
+    return res.status(200).json({ success: true });
   }
 }
