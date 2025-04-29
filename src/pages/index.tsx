@@ -125,8 +125,7 @@ export default function Home() {
           <div className="button-wrapper">
             <button
               onClick={handleSync}
-              //disabled={isSyncing || data.rows.length === 0}
-              disabled
+              disabled={isSyncing || data.rows.length === 0}
             >
               {isSyncing ? 'Syncing…' : 'Sync to CRM'}
             </button>
